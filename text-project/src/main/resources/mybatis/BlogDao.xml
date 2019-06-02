@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.text.project.dao.BlogDao">
+    <insert id="addBlog" parameterType="com.text.project.entity.Blog">
+        insert into text.blog(blog_name, blog_type, create_time, author, blog_context)
+        VALUES (#{blogName},#{blogType},now(),#{author},#{blogContext})
+    </insert>
+    <delete id="delBlog" parameterType="java.lang.Integer">
+        delete from text.blog where id = #{id}
+    </delete>
+    <update id="updateBlog">
+        update text.blog set blog_name = #{blogName},blog_type = #{blogType},
+            create_time = #{createTime}, author = #{author},
+            blog_context = #{blogContext}
+        where id = #{id}
+    </update>
+    <select id="selectBlog" resultType="com.text.project.entity.Blog">
+      select id as id,
+          blog_name as blogName,
+          blog_type as blogType,
+          create_time as createTime,
+          author as author,
+          blog_context as blogContext from text.blog;
+    </select>
+    <select id="selectById" resultType="com.text.project.entity.Blog" parameterType="java.lang.Integer">
+        select id as id,
+               blog_name as blogName,
+               blog_type as blogType,
+               create_time as createTime,
+               author as author,
+               blog_context as blogContext from text.blog
+        where id = #{id};
+    </select>
+</mapper>
